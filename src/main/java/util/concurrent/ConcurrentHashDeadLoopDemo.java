@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * https://mp.weixin.qq.com/s/ QVzlkJLsA7oN5lZrBx43kA
  *
- * @author wanghuanyu
+ * @author why
  */
 public class ConcurrentHashDeadLoopDemo {
 

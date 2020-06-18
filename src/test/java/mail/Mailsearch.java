@@ -32,7 +32,7 @@ import javax.mail.search.SubjectTerm;
 
 /**
  * -P password -D -U XXX.com.cn -today -H imap.exmail.qq.com -P XXX -D -U XXX.com.cn -subject
- * 云中台数据仓库 -P XX -D -U XX.jd.com -today -H mx.jd.local -D -subject 云中台数据仓库 -today -H
+ * 云中台数据仓库 -P XX -D -U XX.j d.com -today -H mx.jd.local -D -subject 云中台数据仓库 -today -H
  * imap.exmail.qq.com
  */
 public class Mailsearch {
