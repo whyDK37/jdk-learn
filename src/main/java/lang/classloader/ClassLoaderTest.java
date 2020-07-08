@@ -1,4 +1,4 @@
-package lang;
+package lang.classloader;
 
 import java.io.IOException;
 import java.io.InputStream;
