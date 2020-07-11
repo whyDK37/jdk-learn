@@ -12,7 +12,7 @@ public class ClassLoaderTest {
     ClassLoader myLoader = new ClassLoader() {
       @Override
       public Class<?> loadClass(String name) throws ClassNotFoundException {
-        if(name.startsWith("java.")){
+        if (name.startsWith("java.")) {
           return super.loadClass(name);
         }
         try {

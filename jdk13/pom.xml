@@ -4,18 +4,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>why</groupId>
-  <artifactId>jdk-learn</artifactId>
+  <artifactId>jdk13-learn</artifactId>
   <packaging>pom</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <modules>
-    <module>jdk13</module>
-    <module>jdk8</module>
-  </modules>
   <name>jdk-learn</name>
   <description>jdk-learn</description>
 
   <properties>
     <build.file.encoding>UTF-8</build.file.encoding>
+    <maven.compiler.source>1.11</maven.compiler.source>
+    <maven.compiler.target>1.11</maven.compiler.target>
 
     <junit.jupiter.version>5.5.2</junit.jupiter.version>
     <junit.platform.version>1.5.2</junit.platform.version>
@@ -27,7 +25,6 @@
       <artifactId>quasar-core</artifactId>
       <version>0.8.0</version>
     </dependency>
-
 
     <dependency>
       <groupId>com.sun.mail</groupId>
