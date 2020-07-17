@@ -8,7 +8,7 @@ public class RateLimiterDemo {
     public static void main(String[] args) {
         RateLimiter limiter = RateLimiter.create(1);
         acquire(limiter);
-        System.out.println("limiter.getRate() = " + limiter.getRate());
+        System.out.println("limiter.getRate()  = " + limiter.getRate());
         limiter.setRate(10);
         acquire(limiter);
 
