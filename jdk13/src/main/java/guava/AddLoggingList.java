@@ -15,6 +15,7 @@ public class AddLoggingList<E> extends ForwardingList<E> {
   }
 
   public static void main(String[] args) {
+    System.out.println("ForwardingList 是一个包装类，会把请求全部调用另外的 list。");
     AddLoggingList<Integer> addLoggingList = new AddLoggingList<>(new ArrayList<>());
     addLoggingList.add(0, 1);
   }
