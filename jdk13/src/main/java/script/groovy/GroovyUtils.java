@@ -3,8 +3,6 @@ package script.groovy;
 import com.alibaba.fastjson.JSON;
 import groovy.json.JsonSlurper;
 import groovy.json.internal.LazyMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.script.*;
 import java.net.MalformedURLException;
@@ -13,7 +11,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GroovyUtils {
-    private static Logger LOGGER = LoggerFactory.getLogger(GroovyUtils.class);
     private static Map<String, CompiledScript> concurrentHashMap = new ConcurrentHashMap<>();
 
     private static ScriptEngine engine = null;
@@ -32,7 +29,8 @@ public class GroovyUtils {
             final CompiledScript compiledScript = getCompiledScript(expression, expression);
             return compiledScript.eval(bindings);
         } catch (ScriptException e) {
-            LOGGER.error("脚本执行异常,expression:[{}], bindings:[{}] ", expression, JSON.toJSONString(bindings), e);
+            e.printStackTrace();
+//            LOGGER.error("脚本执行异常,expression:[{}], bindings:[{}] ", expression, JSON.toJSONString(bindings), e);
             return expression;
         }
     }

@@ -1,7 +1,12 @@
 package util.concurrent;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
@@ -102,6 +107,26 @@ public class CompletableFutureDemo {
 
   }
 
+  @Test
+  public void executor() throws ExecutionException, InterruptedException {
+    final ExecutorService executorService = Executors.newFixedThreadPool(10);
+
+    CompletableFuture<String> cfQueryFromSina = CompletableFuture
+        .supplyAsync(() -> queryCode("中国石油", "https://finance.sina.com.cn/code/"), executorService);
+    CompletableFuture<String> cfQueryFrom163 = CompletableFuture
+        .supplyAsync(() -> queryCode("中国石油", "https://money.163.com/code/"), executorService);
+
+    CompletableFuture.allOf(cfQueryFromSina, cfQueryFrom163).join();
+    System.out.println("all done.");
+    System.out.println(cfQueryFromSina.get());
+    System.out.println(cfQueryFrom163.get());
+
+    ArrayList<String> list = new ArrayList<>();
+    list.add("1");
+    list.add("2");
+    System.out.println(Arrays.toString(list.toArray(new String[2])));
+  }
+
   static String queryCode(String name) {
     try {
       Thread.sleep(100);
@@ -131,11 +156,11 @@ public class CompletableFutureDemo {
   }
 
   static String queryCode(String name, String url) {
-    System.out.println("query code from " + url + "...");
     try {
-      Thread.sleep((long) (Math.random() * 100));
+      Thread.sleep((long) (Math.random() * 5000));
     } catch (InterruptedException e) {
     }
+    System.out.println("query code from " + url + "...");
     return "601857";
   }
 
