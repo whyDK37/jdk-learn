@@ -8,6 +8,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -48,6 +49,19 @@ public class HttpUtils {
     httppost.setEntity(new UrlEncodedFormEntity(pair));
 
     CloseableHttpResponse response = httpclient.execute(httppost);
+    return response.getEntity();//获取响应的对象内容
+  }
+
+
+  public static HttpEntity get(String url)
+      throws IOException {
+
+    //post 请求
+    HttpGet httpGet = new HttpGet(url);
+
+    httpGet.setConfig(config);
+
+    CloseableHttpResponse response = httpclient.execute(httpGet);
     return response.getEntity();//获取响应的对象内容
   }
 }
