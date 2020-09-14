@@ -4,19 +4,33 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Scheduler;
+import reactor.core.scheduler.Schedulers;
 
 public class FluxCreator {
 
   @Test
   void simple() {
     System.out.println("*******");
-    Flux.just("Hello", "World").subscribe(System.out::println);
-    Flux.fromArray(new Integer[]{1, 2, 3}).subscribe(System.out::println);
-    Flux.empty().subscribe(System.out::println);
-    Flux.range(1, 10).subscribe(System.out::println);
-    Flux.interval(Duration.of(10, ChronoUnit.SECONDS)).subscribe(System.out::println);
+    Flux.just("Hello", "World")
+        .switchIfEmpty(subscriber -> {
+          subscriber.onNext("a");
+          subscriber.onNext("b");
+          subscriber.onNext("c");
+        })
+        .take(2)
+        .publishOn(Schedulers.newParallel("in"))
+        .subscribeOn(Schedulers.newParallel("out"))
+        .subscribe(System.out::println);
+
+    Flux.fromArray(new Integer[]{1, 2, 3});
+    Flux.empty();
+    Flux.range(1, 10);
+    Flux.interval(Duration.of(10, ChronoUnit.SECONDS));
     Flux.interval(Duration.ofMillis(1000)).subscribe(System.out::println);
   }
 
