@@ -118,4 +118,10 @@ public class BigDecimalTest {
     return remainder.compareTo(y) < 0 ? base : base.add(x);
   }
 
+  @Test
+  public void bigVal(){
+    BigDecimal bigVal = new BigDecimal("1201379530.400000");
+    System.out.println(bigVal);
+  }
+
 }
