@@ -10,6 +10,8 @@
   <modules>
     <module>jdk13</module>
     <module>jdk8</module>
+    <module>quasar</module>
+    <module>quasar</module>
   </modules>
   <name>jdk-learn</name>
   <description>jdk-learn</description>
