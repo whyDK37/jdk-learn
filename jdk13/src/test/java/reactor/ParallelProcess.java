@@ -1,7 +1,10 @@
 package reactor;
 
+import com.google.common.collect.Lists;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,18 +18,37 @@ public class ParallelProcess {
 
   @Test
   void sequential() {
-    Flux.range(1, 9999)
+    Flux.range(1, 99)
         .subscribe(i -> System.out.println(Thread.currentThread().getName() + " -> " + i));
   }
 
   @Test
-  void parallel() {
-    Flux.range(1, 9999)
+  void parallel() throws InterruptedException {
+    Scheduler scheduler = Schedulers.fromExecutor(Executors.newFixedThreadPool(4));
+    Flux.range(1, 99)
         .parallel(4)
-        .runOn(Schedulers.parallel())
+        .runOn(scheduler)
+        .checkpoint("do subscribe")
+        .doOnNext(System.out::println)
         .subscribe(i -> System.out.println(Thread.currentThread().getName() + " -> " + i));
+
+    System.out.println("done...");
   }
 
+  public static void main(String[] args) {
+
+    Scheduler scheduler = Schedulers.fromExecutor(Executors.newFixedThreadPool(4));
+    Flux<Integer> integerFlux = Flux.fromIterable(Lists.newArrayList(1, 2, 3));
+
+    integerFlux.parallel()
+        .runOn(scheduler)
+        .subscribe(i -> System.out.println(Thread.currentThread().getName() + " -> " + i));
+
+    Mono<List<Integer>> listMono = integerFlux.collectList();
+    System.out.println(listMono.block());
+
+    System.out.println("done");
+  }
 
   @Test
   public void parallelFluxToFlux() {
