@@ -3,10 +3,34 @@ package reactor;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.reactivestreams.Subscription;
+import reactor.core.CoreSubscriber;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public class FluxDemo {
+
+  CoreSubscriber<Integer> subscriber = new CoreSubscriber<>() {//这里传入CoreSubscriber对象作为订阅者
+    @Override
+    public void onSubscribe(Subscription s) {
+      System.out.println("onSubscribe, " + s.getClass());
+      s.request(5);
+    }
+
+    @Override
+    public void onNext(Integer integer) {
+      System.out.println("onNext：" + integer);
+    }
+
+    @Override
+    public void onError(Throwable t) {
+    }
+
+    @Override
+    public void onComplete() {
+      System.out.println("onComplete");
+    }
+  };
 
   @Test
   public void pubSub() {
@@ -21,5 +45,19 @@ public class FluxDemo {
     Mono<String> noData = Mono.empty();
 
     Mono<String> data = Mono.just("foo");
+  }
+
+  @Test
+  public void subscribe() {
+
+    Flux.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
+        .subscribe(subscriber);
+  }
+
+  @Test
+  public void testMap() {
+    Flux.just(1, 2, 3, 4, 5)
+        .map(i -> i * i)
+        .subscribe(subscriber);
   }
 }
