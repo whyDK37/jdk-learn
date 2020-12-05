@@ -2,11 +2,14 @@ package reactor;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 public class FluxDemo {
 
@@ -59,5 +62,24 @@ public class FluxDemo {
     Flux.just(1, 2, 3, 4, 5)
         .map(i -> i * i)
         .subscribe(subscriber);
+  }
+
+  @Test
+  public void publishOn() throws InterruptedException {
+    Flux.just(1, 2, 3, 4, 5)
+        .publishOn(Schedulers.elastic())
+        .doOnNext(new Consumer<Integer>() {
+          @Override
+          public void accept(Integer integer) {
+            System.out.println("next " + Thread.currentThread().getName());
+          }
+        }).subscribe(new Consumer<Integer>() {
+      @Override
+      public void accept(Integer integer) {
+        System.out.println("subscribe " + Thread.currentThread().getName());
+      }
+    });
+
+    TimeUnit.SECONDS.sleep(10);
   }
 }

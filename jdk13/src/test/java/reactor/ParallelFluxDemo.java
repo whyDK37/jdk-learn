@@ -1,9 +1,12 @@
 package reactor;
 
 
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import reactor.core.publisher.Flux;
@@ -61,6 +64,45 @@ public class ParallelFluxDemo {
             System.out.println(Thread.currentThread().getName() + " -> " + i);
           }
         });
+  }
+
+  @Test
+  void parallelWithResult() {
+    Scheduler scheduler = Schedulers.fromExecutor(Executors.newFixedThreadPool(4));
+    Flux<String> ids = ifhrIds();
+
+    Flux<String> combinations =
+        ids.parallel()
+            .runOn(scheduler)
+            .flatMap(id -> {
+              Mono<String> nameTask = ifhrName(id);
+              Mono<Integer> statTask = ifhrStat(id);
+              System.out.println(Thread.currentThread().getName());
+              if ("a".equals(id)) {
+                return Mono.empty();
+              } else {
+                return nameTask;
+              }
+//          return Mono.empty();
+//          return nameTask.zipWith(statTask, (name, stat) -> "Name " + name + " has stats " + stat);
+            }).sequential();
+
+    Mono<List<String>> result = combinations.collectList();
+
+    List<String> results = result.block();
+    System.out.println(results);
+  }
+
+  private Mono<Integer> ifhrStat(String id) {
+    return Mono.just(id.hashCode());
+  }
+
+  private Mono<String> ifhrName(String id) {
+    return Mono.just(id + "ifhrName");
+  }
+
+  private Flux<String> ifhrIds() {
+    return Flux.just("a", "b", "c");
   }
 
   private void blockingTask(int i) throws InterruptedException {
