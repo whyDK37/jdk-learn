@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -16,7 +15,6 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.Warmup;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
 public class ParallelFluxBenchmark {
 
