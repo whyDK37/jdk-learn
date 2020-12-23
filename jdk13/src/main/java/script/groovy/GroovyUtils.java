@@ -1,6 +1,5 @@
 package script.groovy;
 
-import com.alibaba.fastjson.JSON;
 import groovy.json.JsonSlurper;
 import groovy.json.internal.LazyMap;
 
@@ -11,6 +10,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GroovyUtils {
+
     private static Map<String, CompiledScript> concurrentHashMap = new ConcurrentHashMap<>();
 
     private static ScriptEngine engine = null;
@@ -64,7 +64,7 @@ public class GroovyUtils {
         try {
             JsonSlurper jsonSlurper = new JsonSlurper();
             Object object = jsonSlurper.parse(new URL(url));
-            if (object != null && object instanceof LazyMap) {
+            if (object instanceof LazyMap) {
                 return (LazyMap) object;
             }
         } catch (MalformedURLException e) {
@@ -79,7 +79,7 @@ public class GroovyUtils {
         }
         JsonSlurper jsonSlurper = new JsonSlurper();
         Object object = jsonSlurper.parse(jsonStr.getBytes());
-        if (object != null && object instanceof LazyMap) {
+        if (object instanceof LazyMap) {
             return (LazyMap) object;
         }
         return null;
@@ -100,12 +100,22 @@ public class GroovyUtils {
     /**
      * 编译脚本并缓存脚本，达到编译一次，多次执行
      */
-    private static CompiledScript getCompiledScript(String scriptName, String logicRule) throws ScriptException {
-        CompiledScript script = concurrentHashMap.get(scriptName);
-        if (script == null) {
-            script = ((Compilable) engine).compile(logicRule);
-            concurrentHashMap.putIfAbsent(scriptName, script);
-        }
-        return script;
+    private static CompiledScript getCompiledScript(String scriptName, String logicRule) {
+        return concurrentHashMap
+                .computeIfAbsent(scriptName, s -> {
+                    CompiledScript script;
+                    try {
+                        script = ((Compilable) engine).compile(logicRule);
+                    } catch (ScriptException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return script;
+                });
+//        CompiledScript script = concurrentHashMap.get(scriptName);
+//        if (script == null) {
+//            script = ((Compilable) engine).compile(logicRule);
+//            concurrentHashMap.putIfAbsent(scriptName, script);
+//        }
+//        return script;
     }
 }

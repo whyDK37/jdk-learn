@@ -3,10 +3,17 @@ package script.groovy;
 import groovy.json.internal.LazyMap;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class GroovyUtilsTest {
+public class GroovyUtilsTest {
 
+    public static void main(String[] args) throws IOException {
+        GroovyUtilsTest test = new GroovyUtilsTest();
+        test.main();
+        System.in.read();
+    }
 
     @Test
     public void main() {
@@ -36,7 +43,9 @@ class GroovyUtilsTest {
         System.out.println(lazyMap.get("qty").getClass());
         assertEquals(10, lazyMap.get("qty"));
 
-        assertEquals("message.qty", GroovyUtils.evalExpression("message.qty", lazyMap));
-        assertEquals("0", GroovyUtils.evalExpressionToString("0", lazyMap));
+        System.out.println(GroovyUtils.evalExpression("actionCode==null?0:actionCode", lazyMap));
+
+//        assertEquals("message.qty", GroovyUtils.evalExpression("message.qty", lazyMap));
+//        assertEquals("0", GroovyUtils.evalExpressionToString("0", lazyMap));
     }
 }

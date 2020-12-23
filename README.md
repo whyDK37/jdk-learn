@@ -17,4 +17,6 @@
 ## JMH 性能测试
 
 - [JMH](https://github.com/openjdk/jmh)
+- [JMH Visualizer](https://jmh.morethan.io/) 需要上传 json 结果，参考 JMHSample_01_HelloWorld.java 的配置。
+- [JMH samples](http://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/)  
 - [IDEA下进行 JMH Java微基准测试工具套件](https://blog.csdn.net/liushaomr/article/details/107729539)

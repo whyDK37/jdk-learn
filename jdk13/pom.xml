@@ -17,7 +17,7 @@
 
     <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
 
-    <groovy-all.version>2.4.8</groovy-all.version>
+    <groovy-all.version>2.4.21</groovy-all.version>
     <junit.jupiter.version>5.5.2</junit.jupiter.version>
     <junit.platform.version>1.5.2</junit.platform.version>
   </properties>
@@ -105,6 +105,32 @@
       <artifactId>mapstruct</artifactId>
       <version>${org.mapstruct.version}</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>4.1.54.Final</version>
+    </dependency>
+
+    <!-- high performance -->
+    <dependency>
+      <groupId>org.agrona</groupId>
+      <artifactId>agrona</artifactId>
+      <version>1.8.0</version>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.eclipse.collections</groupId>-->
+<!--      <artifactId>eclipse-collections-api</artifactId>-->
+<!--      <version>10.4.0</version>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>org.eclipse.collections</groupId>
+      <artifactId>eclipse-collections</artifactId>
+      <version>10.4.0</version>
+    </dependency>
+
+
 
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
