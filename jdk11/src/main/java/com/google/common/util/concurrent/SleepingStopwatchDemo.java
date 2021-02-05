@@ -5,7 +5,10 @@ import com.google.common.util.concurrent.RateLimiter.SleepingStopwatch;
 public class SleepingStopwatchDemo {
 
   public static void main(String[] args) {
-    SleepingStopwatch fromSystemTimer = SleepingStopwatch.createFromSystemTimer();
+    SleepingStopwatch sleepingStopwatch = SleepingStopwatch.createFromSystemTimer();
+    sleepingStopwatch.sleepMicrosUninterruptibly(1000L);
+    var a="";
+    System.out.println(a);
   }
 
 }

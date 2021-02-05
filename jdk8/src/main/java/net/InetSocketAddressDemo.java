@@ -18,14 +18,13 @@ public class InetSocketAddressDemo {
         System.out.println("unresolved.getHostName() = " + unresolved.getHostName());
         System.out.println("unresolved.getAddress() = " + unresolved.getAddress());
 
-        InetSocketAddress addr = new InetSocketAddress(host, port);
 
         SocketChannel sock = SocketChannel.open();
         sock.configureBlocking(false);
         sock.socket().setSoLinger(false, -1);
         sock.socket().setTcpNoDelay(true);
 
-        boolean connect = sock.connect(addr);
+        boolean connect = sock.connect(unresolved);
         System.out.println("connect = " + connect);
     }
 
