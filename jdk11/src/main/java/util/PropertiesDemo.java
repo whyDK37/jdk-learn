@@ -12,6 +12,7 @@ public class PropertiesDemo {
     Map map = properties;
     map.put("1", 3);
 
+    // properties 没有遵守里氏替换原则
     System.out.println("properties.getProperty(\"1\") = " + properties.getProperty("1"));
   }
 
