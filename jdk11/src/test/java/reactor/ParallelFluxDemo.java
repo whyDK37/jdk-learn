@@ -1,20 +1,23 @@
 package reactor;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
-import java.util.function.Function;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 
 public class ParallelFluxDemo {
+
+  public static void print(String s) {
+    System.out.println(Thread.currentThread().getName() + " > " + s);
+  }
 
   @Test
   void p0() {
@@ -68,20 +71,24 @@ public class ParallelFluxDemo {
 
   @Test
   void parallelWithResult() {
-    Scheduler scheduler = Schedulers.fromExecutor(Executors.newFixedThreadPool(4));
-    Flux<String> ids = ifhrIds();
+    ExecutorService executor = Executors.newFixedThreadPool(40);
+    Scheduler scheduler = Schedulers.fromExecutor(executor);
+    List<String> list = new ArrayList<>();
+    for (int i = 0; i < 27244; i++) {
+      list.add(i + "");
+    }
+    Flux<String> ids = Flux.fromIterable(list);
 
     Flux<String> combinations =
-        ids.parallel()
+        ids.parallel(10)
             .runOn(scheduler)
             .flatMap(id -> {
               Mono<String> nameTask = ifhrName(id);
               Mono<Integer> statTask = ifhrStat(id);
-              System.out.println(Thread.currentThread().getName());
               if ("a".equals(id)) {
-                return Mono.empty();
+                return Mono.just(Thread.currentThread().getName());
               } else {
-                return nameTask;
+                return Mono.just(Thread.currentThread().getName() + " " + id);
               }
 //          return Mono.empty();
 //          return nameTask.zipWith(statTask, (name, stat) -> "Name " + name + " has stats " + stat);
@@ -90,7 +97,8 @@ public class ParallelFluxDemo {
     Mono<List<String>> result = combinations.collectList();
 
     List<String> results = result.block();
-    System.out.println(results);
+    results.forEach(System.out::println);
+    executor.shutdown();
   }
 
   private Mono<Integer> ifhrStat(String id) {
@@ -108,10 +116,6 @@ public class ParallelFluxDemo {
   private void blockingTask(int i) throws InterruptedException {
     System.out.println(Thread.currentThread().getName() + " -> " + i);
     TimeUnit.MILLISECONDS.sleep(10L);
-  }
-
-  public static void print(String s) {
-    System.out.println(Thread.currentThread().getName() + " > " + s);
   }
 
 }
