@@ -1,0 +1,7 @@
+create 策略名称1a
+with 场景,业务主键a1,业务主键b2
+when
+(bar > foo or bar = foo)
+then
+message abcdefggggggggtggggggfgfg{"k":"v"}
+return abc

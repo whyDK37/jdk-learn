@@ -7,7 +7,7 @@ import java.util.Map;
 public class EvalVisitor extends LabeledExprBaseVisitor<Integer> {
 
   // 保存计算中的变量
-  Map<String, Integer> memory = new HashMap<String, Integer>();
+  Map<String, Integer> memory = new HashMap<>();
 
   @Override
   public Integer visitPrintExpr(LabeledExprParser.PrintExprContext ctx) {
