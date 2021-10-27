@@ -66,6 +66,30 @@ public interface PolicyListener extends ParseTreeListener {
 	 */
 	void exitWhenExpr(PolicyParser.WhenExprContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code then}
+	 * labeled alternative in {@link PolicyParser#thenDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterThen(PolicyParser.ThenContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code then}
+	 * labeled alternative in {@link PolicyParser#thenDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitThen(PolicyParser.ThenContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code thenExpr}
+	 * labeled alternative in {@link PolicyParser#thenExprDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterThenExpr(PolicyParser.ThenExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code thenExpr}
+	 * labeled alternative in {@link PolicyParser#thenExprDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitThenExpr(PolicyParser.ThenExprContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code primaryProc}
 	 * labeled alternative in {@link PolicyParser#expression}.
 	 * @param ctx the parse tree
@@ -126,6 +150,16 @@ public interface PolicyListener extends ParseTreeListener {
 	 */
 	void exitEqualsOrNot(PolicyParser.EqualsOrNotContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PolicyParser#exeUnit}.
+	 * @param ctx the parse tree
+	 */
+	void enterExeUnit(PolicyParser.ExeUnitContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PolicyParser#exeUnit}.
+	 * @param ctx the parse tree
+	 */
+	void exitExeUnit(PolicyParser.ExeUnitContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PolicyParser#primary}.
 	 * @param ctx the parse tree
 	 */
@@ -165,4 +199,14 @@ public interface PolicyListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBooleanLiteral(PolicyParser.BooleanLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PolicyParser#anytext}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnytext(PolicyParser.AnytextContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PolicyParser#anytext}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnytext(PolicyParser.AnytextContext ctx);
 }

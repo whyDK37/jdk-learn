@@ -45,6 +45,20 @@ public interface PolicyVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhenExpr(PolicyParser.WhenExprContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code then}
+	 * labeled alternative in {@link PolicyParser#thenDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitThen(PolicyParser.ThenContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code thenExpr}
+	 * labeled alternative in {@link PolicyParser#thenExprDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitThenExpr(PolicyParser.ThenExprContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code primaryProc}
 	 * labeled alternative in {@link PolicyParser#expression}.
 	 * @param ctx the parse tree
@@ -80,6 +94,12 @@ public interface PolicyVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEqualsOrNot(PolicyParser.EqualsOrNotContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PolicyParser#exeUnit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExeUnit(PolicyParser.ExeUnitContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PolicyParser#primary}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -103,4 +123,10 @@ public interface PolicyVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBooleanLiteral(PolicyParser.BooleanLiteralContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PolicyParser#anytext}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAnytext(PolicyParser.AnytextContext ctx);
 }

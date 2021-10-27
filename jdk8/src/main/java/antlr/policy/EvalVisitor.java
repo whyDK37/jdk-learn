@@ -1,8 +1,16 @@
 package antlr.policy;
 
 import antlr.policy.PolicyParser.CreateContext;
+import antlr.policy.PolicyParser.ThenContext;
+import antlr.policy.PolicyParser.ThenExprContext;
+import antlr.policy.PolicyParser.WhenContext;
+import antlr.policy.PolicyParser.WhenExprContext;
+import antlr.policy.PolicyParser.WithContext;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 
 public class EvalVisitor extends PolicyBaseVisitor<String> {
@@ -25,28 +33,28 @@ public class EvalVisitor extends PolicyBaseVisitor<String> {
     return super.visitCreate(ctx);
   }
 
-//  @Override
-//  public String visitWith(WithContext ctx) {
-//    List<TerminalNode> id1 = ctx.Identifier();
-//    print("with ");
-//    for (TerminalNode terminalNode : id1) {
-//      print(terminalNode.getText() + ",");
-//    }
-//    println("");
-//    return super.visitWith(ctx);
-//  }
+  @Override
+  public String visitWith(WithContext ctx) {
+    List<TerminalNode> id1 = ctx.Identifier();
+    print("with ");
+    for (TerminalNode terminalNode : id1) {
+      print(terminalNode.getText() + ",");
+    }
+    println("");
+    return super.visitWith(ctx);
+  }
 
-//  @Override
-//  public String visitWhen(WhenContext ctx) {
-//    println(ctx.getText());
-//    return super.visitWhen(ctx);
-//  }
+  @Override
+  public String visitWhen(WhenContext ctx) {
+    println(ctx.getText());
+    return super.visitWhen(ctx);
+  }
 
-//  @Override
-//  public String visitWhenExpr(WhenExprContext ctx) {
-//    println(ctx.getText());
-//    return super.visitWhenExpr(ctx);
-//  }
+  @Override
+  public String visitWhenExpr(WhenExprContext ctx) {
+    println(ctx.getText());
+    return super.visitWhenExpr(ctx);
+  }
 
 
 //  @Override
@@ -59,19 +67,22 @@ public class EvalVisitor extends PolicyBaseVisitor<String> {
 //    return FALSE;
 //  }
 
-//  @Override
-//  public String visitThen(ThenContext ctx) {
-//    System.out.println(ctx.getText());
-//    return super.visitThen(ctx);
-//  }
+  @Override
+  public String visitThen(ThenContext ctx) {
+    println(ctx.getText());
+    return super.visitThen(ctx);
+  }
 
-//  @Override
-//  public String visitThenMsg(ThenMsgContext ctx) {
-//    for (ParseTree child : ctx.children) {
-//      print(child.getText() + " ");
-//    }
-//    println();
-//    return super.visitThenMsg(ctx);
+  @Override
+  public String visitThenExpr(ThenExprContext ctx) {
+    println(ctx.getText());
+    return super.visitThenExpr(ctx);
+  }
+
+  //  @Override
+//  public String visitThenMessage(ThenMessageContext ctx) {
+//    println(ctx.getText());
+//    return super.visitThenMessage(ctx);
 //  }
 
 //  @Override

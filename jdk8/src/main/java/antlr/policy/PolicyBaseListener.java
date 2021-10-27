@@ -76,6 +76,30 @@ public class PolicyBaseListener implements PolicyListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterThen(PolicyParser.ThenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitThen(PolicyParser.ThenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterThenExpr(PolicyParser.ThenExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitThenExpr(PolicyParser.ThenExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPrimaryProc(PolicyParser.PrimaryProcContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -136,6 +160,18 @@ public class PolicyBaseListener implements PolicyListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExeUnit(PolicyParser.ExeUnitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExeUnit(PolicyParser.ExeUnitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPrimary(PolicyParser.PrimaryContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -179,6 +215,18 @@ public class PolicyBaseListener implements PolicyListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBooleanLiteral(PolicyParser.BooleanLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAnytext(PolicyParser.AnytextContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAnytext(PolicyParser.AnytextContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

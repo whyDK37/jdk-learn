@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.misc.TestRig;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 public class PolicyMain {
@@ -27,7 +28,8 @@ public class PolicyMain {
 
     ParseTree tree = parser.compilationUnit(); // parse
     System.out.println(tree.toStringTree());
-//    EvalVisitor eval = new EvalVisitor(param);
-//    eval.visit(tree);
+    EvalVisitor eval = new EvalVisitor(param);
+    eval.visit(tree);
   }
+
 }

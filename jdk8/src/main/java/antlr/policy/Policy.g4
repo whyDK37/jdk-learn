@@ -7,49 +7,51 @@ grammar Policy;
 /** The start rule; beginparsing here. */
 compilationUnit
     :   createDeclaration NEWLINE?
-         withDeclaration NEWLINE
+         withDeclaration NEWLINE?
          whenDeclaration NEWLINE?
-         whenExprDeclaration NEWLINE
-//         thenDeclaration NEWLINE
-//         thenExprDeclaration NEWLINE
-//        EOF
+         thenDeclaration
+        EOF
     ;
 // # 之后是自定义 visitor 方法
 createDeclaration
-    :   'create' Identifier    # create
+    :   'create'  Identifier    # create
     ;
 withDeclaration
-    :   'with' Identifier ',' Identifier ',' Identifier   # with
+    :   'with'  Identifier ',' Identifier ',' Identifier   # with
     ;
 whenDeclaration
-    :   'when'             # when
+    :   'when'   NEWLINE?   whenExprDeclaration  # when
     ;
 
 
 whenExprDeclaration
     :   '(' expression ')'                           # whenExpr
     ;
+
+thenDeclaration
+    :   'then' NEWLINE  thenExprDeclaration  # then
+    ;
 //
-//thenDeclaration
-//    :   'then'             # then
-//    ;
-//
-//thenExprDeclaration
-//    : 'message'      anytext                     # thenMsg
-//    | 'return'       anytext                       # thenReturn
-//    ;
-//
+thenExprDeclaration
+    : ('return'|'message')+ anytext  # thenExpr
+  ;
+
 expression
-    : primary # primaryProc
+    : primary                                                        # primaryProc
     | expression op=('<=' | '>=' | '>' | '<'|'=' | '!=') expression # logicOp
-    |   expression ('==' | '!=') expression                 # equalsOrNot
+    |   expression ('==' | '!=') expression                          # equalsOrNot
     //|   expression op=('+'|'-'|'*'|'/'|'%') expression     # mathOp
 //    |   ID                                                # identifier
-    |   expression 'and' expression                          # and
-    |   expression 'or' expression                          # or
+    |   expression 'and' expression                                   # and
+    |   expression 'or' expression                                      # or
 //    | NEWLINE                                               # blanke
     ;
 //
+
+exeUnit: 'EXECUTE' anytext
+        EOF
+   ;
+
 primary
     :   '(' expression ')'
     |   literal
@@ -162,27 +164,28 @@ JavaIDDigit
        '\u1040'..'\u1049'
    ;
 
-//DecimalLiteral : ('0' | '1'..'9' '0'..'9'*) IntegerTypeSuffix? ;
-//
-//fragment
-//IntegerTypeSuffix : ('l'|'L') ;
-//
-//comment : '//' anytext;
-//
-//anytext: ANY*;
-//ANY : (. | '"' | '{' | '}');
+DecimalLiteral : ('0' | '1'..'9' '0'..'9'*) IntegerTypeSuffix? ;
+
+fragment
+IntegerTypeSuffix : ('l'|'L') ;
+
+//comment : '//' .*? ;
+//COMMENT : '/*' .*? '*/' -> skip ; // .*? matches anything until the first */
+
 //
 //ID : ('a' .. 'z' | 'A' .. 'Z' | '\u4E00'..'\u9FA5' | '\uF900'..'\uFA2D')+ ; // matchidentifiers
 //INT : [0-9]+ ; // match integers
 NEWLINE:'\r'? '\n' ;//return newlinesto parser(end-statement signal)
-//MUL : '*' ;
-//DIV : '/' ;
-//ADD : '+' ;
-//SUB : '-' ;
-//AND : 'and' ;
-//GT : '>' ;
-//GTE : '>=' ;
-//LT : '<' ;
-//PARAMETER : 'PARAMETER';
+MUL : '*' ;
+DIV : '/' ;
+ADD : '+' ;
+SUB : '-' ;
+AND : 'and' ;
+GT : '>' ;
+GTE : '>=' ;
+LT : '<' ;
+PARAMETER : 'PARAMETER';
 
 WS : [ \t\r\n]+ -> skip ;
+anytext: .*?;
+ANY : .;

@@ -19,25 +19,31 @@ public class PolicyParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		T__17=18, StringLiteral=19, Identifier=20, NEWLINE=21, WS=22, DecimalLiteral=23;
+		T__17=18, StringLiteral=19, Identifier=20, DecimalLiteral=21, NEWLINE=22, 
+		MUL=23, DIV=24, ADD=25, SUB=26, AND=27, GT=28, GTE=29, LT=30, PARAMETER=31, 
+		WS=32, ANY=33;
 	public static final int
 		RULE_compilationUnit = 0, RULE_createDeclaration = 1, RULE_withDeclaration = 2, 
-		RULE_whenDeclaration = 3, RULE_whenExprDeclaration = 4, RULE_expression = 5, 
-		RULE_primary = 6, RULE_literal = 7, RULE_integerLiteral = 8, RULE_booleanLiteral = 9;
+		RULE_whenDeclaration = 3, RULE_whenExprDeclaration = 4, RULE_thenDeclaration = 5, 
+		RULE_thenExprDeclaration = 6, RULE_expression = 7, RULE_exeUnit = 8, RULE_primary = 9, 
+		RULE_literal = 10, RULE_integerLiteral = 11, RULE_booleanLiteral = 12, 
+		RULE_anytext = 13;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"compilationUnit", "createDeclaration", "withDeclaration", "whenDeclaration", 
-			"whenExprDeclaration", "expression", "primary", "literal", "integerLiteral", 
-			"booleanLiteral"
+			"whenExprDeclaration", "thenDeclaration", "thenExprDeclaration", "expression", 
+			"exeUnit", "primary", "literal", "integerLiteral", "booleanLiteral", 
+			"anytext"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'create'", "'with'", "','", "'when'", "'('", "')'", "'<='", "'>='", 
-			"'>'", "'<'", "'='", "'!='", "'=='", "'and'", "'or'", "'null'", "'true'", 
-			"'false'"
+			null, "'create'", "'with'", "','", "'when'", "'('", "')'", "'then'", 
+			"'return'", "'message'", "'<='", "'='", "'!='", "'=='", "'or'", "'EXECUTE'", 
+			"'null'", "'true'", "'false'", null, null, null, null, "'*'", "'/'", 
+			"'+'", "'-'", "'and'", "'>'", "'>='", "'<'", "'PARAMETER'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -45,7 +51,8 @@ public class PolicyParser extends Parser {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, "StringLiteral", "Identifier", 
-			"NEWLINE", "WS", "DecimalLiteral"
+			"DecimalLiteral", "NEWLINE", "MUL", "DIV", "ADD", "SUB", "AND", "GT", 
+			"GTE", "LT", "PARAMETER", "WS", "ANY"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -106,15 +113,16 @@ public class PolicyParser extends Parser {
 		public WithDeclarationContext withDeclaration() {
 			return getRuleContext(WithDeclarationContext.class,0);
 		}
-		public List<TerminalNode> NEWLINE() { return getTokens(PolicyParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(PolicyParser.NEWLINE, i);
-		}
 		public WhenDeclarationContext whenDeclaration() {
 			return getRuleContext(WhenDeclarationContext.class,0);
 		}
-		public WhenExprDeclarationContext whenExprDeclaration() {
-			return getRuleContext(WhenExprDeclarationContext.class,0);
+		public ThenDeclarationContext thenDeclaration() {
+			return getRuleContext(ThenDeclarationContext.class,0);
+		}
+		public TerminalNode EOF() { return getToken(PolicyParser.EOF, 0); }
+		public List<TerminalNode> NEWLINE() { return getTokens(PolicyParser.NEWLINE); }
+		public TerminalNode NEWLINE(int i) {
+			return getToken(PolicyParser.NEWLINE, i);
 		}
 		public CompilationUnitContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -142,38 +150,46 @@ public class PolicyParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(20);
-			createDeclaration();
-			setState(22);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==NEWLINE) {
-				{
-				setState(21);
-				match(NEWLINE);
-				}
-			}
-
-			setState(24);
-			withDeclaration();
-			setState(25);
-			match(NEWLINE);
-			setState(26);
-			whenDeclaration();
 			setState(28);
+			createDeclaration();
+			setState(30);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NEWLINE) {
 				{
-				setState(27);
+				setState(29);
 				match(NEWLINE);
 				}
 			}
 
-			setState(30);
-			whenExprDeclaration();
-			setState(31);
-			match(NEWLINE);
+			setState(32);
+			withDeclaration();
+			setState(34);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==NEWLINE) {
+				{
+				setState(33);
+				match(NEWLINE);
+				}
+			}
+
+			setState(36);
+			whenDeclaration();
+			setState(38);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==NEWLINE) {
+				{
+				setState(37);
+				match(NEWLINE);
+				}
+			}
+
+			setState(40);
+			thenDeclaration();
+			setState(41);
+			match(EOF);
 			}
 		}
 		catch (RecognitionException re) {
@@ -223,9 +239,9 @@ public class PolicyParser extends Parser {
 			_localctx = new CreateContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(33);
+			setState(43);
 			match(T__0);
-			setState(34);
+			setState(44);
 			match(Identifier);
 			}
 		}
@@ -279,17 +295,17 @@ public class PolicyParser extends Parser {
 			_localctx = new WithContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(36);
+			setState(46);
 			match(T__1);
-			setState(37);
+			setState(47);
 			match(Identifier);
-			setState(38);
+			setState(48);
 			match(T__2);
-			setState(39);
+			setState(49);
 			match(Identifier);
-			setState(40);
+			setState(50);
 			match(T__2);
-			setState(41);
+			setState(51);
 			match(Identifier);
 			}
 		}
@@ -316,6 +332,10 @@ public class PolicyParser extends Parser {
 		}
 	}
 	public static class WhenContext extends WhenDeclarationContext {
+		public WhenExprDeclarationContext whenExprDeclaration() {
+			return getRuleContext(WhenExprDeclarationContext.class,0);
+		}
+		public TerminalNode NEWLINE() { return getToken(PolicyParser.NEWLINE, 0); }
 		public WhenContext(WhenDeclarationContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -335,12 +355,25 @@ public class PolicyParser extends Parser {
 	public final WhenDeclarationContext whenDeclaration() throws RecognitionException {
 		WhenDeclarationContext _localctx = new WhenDeclarationContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_whenDeclaration);
+		int _la;
 		try {
 			_localctx = new WhenContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(43);
+			setState(53);
 			match(T__3);
+			setState(55);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==NEWLINE) {
+				{
+				setState(54);
+				match(NEWLINE);
+				}
+			}
+
+			setState(57);
+			whenExprDeclaration();
 			}
 		}
 		catch (RecognitionException re) {
@@ -392,12 +425,153 @@ public class PolicyParser extends Parser {
 			_localctx = new WhenExprContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(45);
+			setState(59);
 			match(T__4);
-			setState(46);
+			setState(60);
 			expression(0);
-			setState(47);
+			setState(61);
 			match(T__5);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ThenDeclarationContext extends ParserRuleContext {
+		public ThenDeclarationContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_thenDeclaration; }
+	 
+		public ThenDeclarationContext() { }
+		public void copyFrom(ThenDeclarationContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class ThenContext extends ThenDeclarationContext {
+		public TerminalNode NEWLINE() { return getToken(PolicyParser.NEWLINE, 0); }
+		public ThenExprDeclarationContext thenExprDeclaration() {
+			return getRuleContext(ThenExprDeclarationContext.class,0);
+		}
+		public ThenContext(ThenDeclarationContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PolicyListener ) ((PolicyListener)listener).enterThen(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PolicyListener ) ((PolicyListener)listener).exitThen(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PolicyVisitor ) return ((PolicyVisitor<? extends T>)visitor).visitThen(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ThenDeclarationContext thenDeclaration() throws RecognitionException {
+		ThenDeclarationContext _localctx = new ThenDeclarationContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_thenDeclaration);
+		try {
+			_localctx = new ThenContext(_localctx);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(63);
+			match(T__6);
+			setState(64);
+			match(NEWLINE);
+			setState(65);
+			thenExprDeclaration();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ThenExprDeclarationContext extends ParserRuleContext {
+		public ThenExprDeclarationContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_thenExprDeclaration; }
+	 
+		public ThenExprDeclarationContext() { }
+		public void copyFrom(ThenExprDeclarationContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class ThenExprContext extends ThenExprDeclarationContext {
+		public AnytextContext anytext() {
+			return getRuleContext(AnytextContext.class,0);
+		}
+		public ThenExprContext(ThenExprDeclarationContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PolicyListener ) ((PolicyListener)listener).enterThenExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PolicyListener ) ((PolicyListener)listener).exitThenExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PolicyVisitor ) return ((PolicyVisitor<? extends T>)visitor).visitThenExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ThenExprDeclarationContext thenExprDeclaration() throws RecognitionException {
+		ThenExprDeclarationContext _localctx = new ThenExprDeclarationContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_thenExprDeclaration);
+		int _la;
+		try {
+			int _alt;
+			_localctx = new ThenExprContext(_localctx);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(68); 
+			_errHandler.sync(this);
+			_alt = 1;
+			do {
+				switch (_alt) {
+				case 1:
+					{
+					{
+					setState(67);
+					_la = _input.LA(1);
+					if ( !(_la==T__7 || _la==T__8) ) {
+					_errHandler.recoverInline(this);
+					}
+					else {
+						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+						_errHandler.reportMatch(this);
+						consume();
+					}
+					}
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				setState(70); 
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
+			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+			setState(72);
+			anytext();
 			}
 		}
 		catch (RecognitionException re) {
@@ -470,6 +644,7 @@ public class PolicyParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
+		public TerminalNode AND() { return getToken(PolicyParser.AND, 0); }
 		public AndContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -493,6 +668,9 @@ public class PolicyParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
+		public TerminalNode GTE() { return getToken(PolicyParser.GTE, 0); }
+		public TerminalNode GT() { return getToken(PolicyParser.GT, 0); }
+		public TerminalNode LT() { return getToken(PolicyParser.LT, 0); }
 		public LogicOpContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -540,8 +718,8 @@ public class PolicyParser extends Parser {
 		int _parentState = getState();
 		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState);
 		ExpressionContext _prevctx = _localctx;
-		int _startState = 10;
-		enterRecursionRule(_localctx, 10, RULE_expression, _p);
+		int _startState = 14;
+		enterRecursionRule(_localctx, 14, RULE_expression, _p);
 		int _la;
 		try {
 			int _alt;
@@ -552,31 +730,31 @@ public class PolicyParser extends Parser {
 			_ctx = _localctx;
 			_prevctx = _localctx;
 
-			setState(50);
+			setState(75);
 			primary();
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(66);
+			setState(91);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(64);
+					setState(89);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 					case 1:
 						{
 						_localctx = new LogicOpContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(52);
+						setState(77);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(53);
+						setState(78);
 						((LogicOpContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10) | (1L << T__11))) != 0)) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << GT) | (1L << GTE) | (1L << LT))) != 0)) ) {
 							((LogicOpContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
@@ -584,7 +762,7 @@ public class PolicyParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(54);
+						setState(79);
 						expression(5);
 						}
 						break;
@@ -592,9 +770,9 @@ public class PolicyParser extends Parser {
 						{
 						_localctx = new EqualsOrNotContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(55);
+						setState(80);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(56);
+						setState(81);
 						_la = _input.LA(1);
 						if ( !(_la==T__11 || _la==T__12) ) {
 						_errHandler.recoverInline(this);
@@ -604,7 +782,7 @@ public class PolicyParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(57);
+						setState(82);
 						expression(4);
 						}
 						break;
@@ -612,11 +790,11 @@ public class PolicyParser extends Parser {
 						{
 						_localctx = new AndContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(58);
+						setState(83);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(59);
-						match(T__13);
-						setState(60);
+						setState(84);
+						match(AND);
+						setState(85);
 						expression(3);
 						}
 						break;
@@ -624,20 +802,20 @@ public class PolicyParser extends Parser {
 						{
 						_localctx = new OrContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(61);
+						setState(86);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(62);
-						match(T__14);
-						setState(63);
+						setState(87);
+						match(T__13);
+						setState(88);
 						expression(2);
 						}
 						break;
 					}
 					} 
 				}
-				setState(68);
+				setState(93);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			}
 			}
 		}
@@ -648,6 +826,55 @@ public class PolicyParser extends Parser {
 		}
 		finally {
 			unrollRecursionContexts(_parentctx);
+		}
+		return _localctx;
+	}
+
+	public static class ExeUnitContext extends ParserRuleContext {
+		public AnytextContext anytext() {
+			return getRuleContext(AnytextContext.class,0);
+		}
+		public TerminalNode EOF() { return getToken(PolicyParser.EOF, 0); }
+		public ExeUnitContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_exeUnit; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PolicyListener ) ((PolicyListener)listener).enterExeUnit(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PolicyListener ) ((PolicyListener)listener).exitExeUnit(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PolicyVisitor ) return ((PolicyVisitor<? extends T>)visitor).visitExeUnit(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ExeUnitContext exeUnit() throws RecognitionException {
+		ExeUnitContext _localctx = new ExeUnitContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_exeUnit);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(94);
+			match(T__14);
+			setState(95);
+			anytext();
+			setState(96);
+			match(EOF);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
 		}
 		return _localctx;
 	}
@@ -681,19 +908,19 @@ public class PolicyParser extends Parser {
 
 	public final PrimaryContext primary() throws RecognitionException {
 		PrimaryContext _localctx = new PrimaryContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_primary);
+		enterRule(_localctx, 18, RULE_primary);
 		try {
-			setState(75);
+			setState(104);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__4:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(69);
+				setState(98);
 				match(T__4);
-				setState(70);
+				setState(99);
 				expression(0);
-				setState(71);
+				setState(100);
 				match(T__5);
 				}
 				break;
@@ -704,14 +931,14 @@ public class PolicyParser extends Parser {
 			case DecimalLiteral:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(73);
+				setState(102);
 				literal();
 				}
 				break;
 			case Identifier:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(74);
+				setState(103);
 				match(Identifier);
 				}
 				break;
@@ -759,22 +986,22 @@ public class PolicyParser extends Parser {
 
 	public final LiteralContext literal() throws RecognitionException {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_literal);
+		enterRule(_localctx, 20, RULE_literal);
 		try {
-			setState(81);
+			setState(110);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case DecimalLiteral:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(77);
+				setState(106);
 				integerLiteral();
 				}
 				break;
 			case StringLiteral:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(78);
+				setState(107);
 				match(StringLiteral);
 				}
 				break;
@@ -782,14 +1009,14 @@ public class PolicyParser extends Parser {
 			case T__17:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(79);
+				setState(108);
 				booleanLiteral();
 				}
 				break;
 			case T__15:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(80);
+				setState(109);
 				match(T__15);
 				}
 				break;
@@ -831,11 +1058,11 @@ public class PolicyParser extends Parser {
 
 	public final IntegerLiteralContext integerLiteral() throws RecognitionException {
 		IntegerLiteralContext _localctx = new IntegerLiteralContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_integerLiteral);
+		enterRule(_localctx, 22, RULE_integerLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(83);
+			setState(112);
 			match(DecimalLiteral);
 			}
 		}
@@ -872,12 +1099,12 @@ public class PolicyParser extends Parser {
 
 	public final BooleanLiteralContext booleanLiteral() throws RecognitionException {
 		BooleanLiteralContext _localctx = new BooleanLiteralContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_booleanLiteral);
+		enterRule(_localctx, 24, RULE_booleanLiteral);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(114);
 			_la = _input.LA(1);
 			if ( !(_la==T__16 || _la==T__17) ) {
 			_errHandler.recoverInline(this);
@@ -900,9 +1127,65 @@ public class PolicyParser extends Parser {
 		return _localctx;
 	}
 
+	public static class AnytextContext extends ParserRuleContext {
+		public AnytextContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_anytext; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PolicyListener ) ((PolicyListener)listener).enterAnytext(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PolicyListener ) ((PolicyListener)listener).exitAnytext(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PolicyVisitor ) return ((PolicyVisitor<? extends T>)visitor).visitAnytext(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final AnytextContext anytext() throws RecognitionException {
+		AnytextContext _localctx = new AnytextContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_anytext);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(119);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+			while ( _alt!=1 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1+1 ) {
+					{
+					{
+					setState(116);
+					matchWildcard();
+					}
+					} 
+				}
+				setState(121);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 5:
+		case 7:
 			return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
@@ -922,28 +1205,36 @@ public class PolicyParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\31Z\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\3"+
-		"\2\3\2\5\2\31\n\2\3\2\3\2\3\2\3\2\5\2\37\n\2\3\2\3\2\3\2\3\3\3\3\3\3\3"+
-		"\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7"+
-		"\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\7\7C\n\7\f\7\16\7F\13\7\3\b\3"+
-		"\b\3\b\3\b\3\b\3\b\5\bN\n\b\3\t\3\t\3\t\3\t\5\tT\n\t\3\n\3\n\3\13\3\13"+
-		"\3\13\2\3\f\f\2\4\6\b\n\f\16\20\22\24\2\5\3\2\t\16\3\2\16\17\3\2\23\24"+
-		"\2Z\2\26\3\2\2\2\4#\3\2\2\2\6&\3\2\2\2\b-\3\2\2\2\n/\3\2\2\2\f\63\3\2"+
-		"\2\2\16M\3\2\2\2\20S\3\2\2\2\22U\3\2\2\2\24W\3\2\2\2\26\30\5\4\3\2\27"+
-		"\31\7\27\2\2\30\27\3\2\2\2\30\31\3\2\2\2\31\32\3\2\2\2\32\33\5\6\4\2\33"+
-		"\34\7\27\2\2\34\36\5\b\5\2\35\37\7\27\2\2\36\35\3\2\2\2\36\37\3\2\2\2"+
-		"\37 \3\2\2\2 !\5\n\6\2!\"\7\27\2\2\"\3\3\2\2\2#$\7\3\2\2$%\7\26\2\2%\5"+
-		"\3\2\2\2&\'\7\4\2\2\'(\7\26\2\2()\7\5\2\2)*\7\26\2\2*+\7\5\2\2+,\7\26"+
-		"\2\2,\7\3\2\2\2-.\7\6\2\2.\t\3\2\2\2/\60\7\7\2\2\60\61\5\f\7\2\61\62\7"+
-		"\b\2\2\62\13\3\2\2\2\63\64\b\7\1\2\64\65\5\16\b\2\65D\3\2\2\2\66\67\f"+
-		"\6\2\2\678\t\2\2\28C\5\f\7\79:\f\5\2\2:;\t\3\2\2;C\5\f\7\6<=\f\4\2\2="+
-		">\7\20\2\2>C\5\f\7\5?@\f\3\2\2@A\7\21\2\2AC\5\f\7\4B\66\3\2\2\2B9\3\2"+
-		"\2\2B<\3\2\2\2B?\3\2\2\2CF\3\2\2\2DB\3\2\2\2DE\3\2\2\2E\r\3\2\2\2FD\3"+
-		"\2\2\2GH\7\7\2\2HI\5\f\7\2IJ\7\b\2\2JN\3\2\2\2KN\5\20\t\2LN\7\26\2\2M"+
-		"G\3\2\2\2MK\3\2\2\2ML\3\2\2\2N\17\3\2\2\2OT\5\22\n\2PT\7\25\2\2QT\5\24"+
-		"\13\2RT\7\22\2\2SO\3\2\2\2SP\3\2\2\2SQ\3\2\2\2SR\3\2\2\2T\21\3\2\2\2U"+
-		"V\7\31\2\2V\23\3\2\2\2WX\t\4\2\2X\25\3\2\2\2\b\30\36BDMS";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#}\4\2\t\2\4\3\t\3"+
+		"\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f"+
+		"\t\f\4\r\t\r\4\16\t\16\4\17\t\17\3\2\3\2\5\2!\n\2\3\2\3\2\5\2%\n\2\3\2"+
+		"\3\2\5\2)\n\2\3\2\3\2\3\2\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5"+
+		"\3\5\5\5:\n\5\3\5\3\5\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\b\6\bG\n\b\r\b"+
+		"\16\bH\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t"+
+		"\3\t\7\t\\\n\t\f\t\16\t_\13\t\3\n\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13"+
+		"\3\13\5\13k\n\13\3\f\3\f\3\f\3\f\5\fq\n\f\3\r\3\r\3\16\3\16\3\17\7\17"+
+		"x\n\17\f\17\16\17{\13\17\3\17\3y\3\20\20\2\4\6\b\n\f\16\20\22\24\26\30"+
+		"\32\34\2\6\3\2\n\13\4\2\f\16\36 \3\2\16\17\3\2\23\24\2}\2\36\3\2\2\2\4"+
+		"-\3\2\2\2\6\60\3\2\2\2\b\67\3\2\2\2\n=\3\2\2\2\fA\3\2\2\2\16F\3\2\2\2"+
+		"\20L\3\2\2\2\22`\3\2\2\2\24j\3\2\2\2\26p\3\2\2\2\30r\3\2\2\2\32t\3\2\2"+
+		"\2\34y\3\2\2\2\36 \5\4\3\2\37!\7\30\2\2 \37\3\2\2\2 !\3\2\2\2!\"\3\2\2"+
+		"\2\"$\5\6\4\2#%\7\30\2\2$#\3\2\2\2$%\3\2\2\2%&\3\2\2\2&(\5\b\5\2\')\7"+
+		"\30\2\2(\'\3\2\2\2()\3\2\2\2)*\3\2\2\2*+\5\f\7\2+,\7\2\2\3,\3\3\2\2\2"+
+		"-.\7\3\2\2./\7\26\2\2/\5\3\2\2\2\60\61\7\4\2\2\61\62\7\26\2\2\62\63\7"+
+		"\5\2\2\63\64\7\26\2\2\64\65\7\5\2\2\65\66\7\26\2\2\66\7\3\2\2\2\679\7"+
+		"\6\2\28:\7\30\2\298\3\2\2\29:\3\2\2\2:;\3\2\2\2;<\5\n\6\2<\t\3\2\2\2="+
+		">\7\7\2\2>?\5\20\t\2?@\7\b\2\2@\13\3\2\2\2AB\7\t\2\2BC\7\30\2\2CD\5\16"+
+		"\b\2D\r\3\2\2\2EG\t\2\2\2FE\3\2\2\2GH\3\2\2\2HF\3\2\2\2HI\3\2\2\2IJ\3"+
+		"\2\2\2JK\5\34\17\2K\17\3\2\2\2LM\b\t\1\2MN\5\24\13\2N]\3\2\2\2OP\f\6\2"+
+		"\2PQ\t\3\2\2Q\\\5\20\t\7RS\f\5\2\2ST\t\4\2\2T\\\5\20\t\6UV\f\4\2\2VW\7"+
+		"\35\2\2W\\\5\20\t\5XY\f\3\2\2YZ\7\20\2\2Z\\\5\20\t\4[O\3\2\2\2[R\3\2\2"+
+		"\2[U\3\2\2\2[X\3\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^\21\3\2\2\2_]\3"+
+		"\2\2\2`a\7\21\2\2ab\5\34\17\2bc\7\2\2\3c\23\3\2\2\2de\7\7\2\2ef\5\20\t"+
+		"\2fg\7\b\2\2gk\3\2\2\2hk\5\26\f\2ik\7\26\2\2jd\3\2\2\2jh\3\2\2\2ji\3\2"+
+		"\2\2k\25\3\2\2\2lq\5\30\r\2mq\7\25\2\2nq\5\32\16\2oq\7\22\2\2pl\3\2\2"+
+		"\2pm\3\2\2\2pn\3\2\2\2po\3\2\2\2q\27\3\2\2\2rs\7\27\2\2s\31\3\2\2\2tu"+
+		"\t\5\2\2u\33\3\2\2\2vx\13\2\2\2wv\3\2\2\2x{\3\2\2\2yz\3\2\2\2yw\3\2\2"+
+		"\2z\35\3\2\2\2{y\3\2\2\2\f $(9H[]jpy";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
