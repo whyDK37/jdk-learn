@@ -1,4 +1,4 @@
-// Generated from /Users/why/ws_my/jdk-learn/jdk11/src/main/java/antlr/labledExpr/LabeledExpr.g4 by ANTLR 4.9.1
+// Generated from /Users/why/ws_my/jdk-learn/jdk8/src/main/java/antlr/labledExpr/LabeledExpr.g4 by ANTLR 4.9.1
 package antlr.labledExpr;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -32,6 +32,13 @@ public class LabeledExprBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitAssign(LabeledExprParser.AssignContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitClear(LabeledExprParser.ClearContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

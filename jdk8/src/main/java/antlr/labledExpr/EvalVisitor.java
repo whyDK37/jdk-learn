@@ -1,5 +1,6 @@
 package antlr.labledExpr;
 
+import antlr.labledExpr.LabeledExprParser.ClearContext;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,5 +67,11 @@ public class EvalVisitor extends LabeledExprBaseVisitor<Integer> {
   @Override
   public Integer visitInt(LabeledExprParser.IntContext ctx) {
     return Integer.valueOf(ctx.INT().getText());
+  }
+
+  @Override
+  public Integer visitClear(ClearContext ctx) {
+    memory.clear();
+    return super.visitClear(ctx);
   }
 }

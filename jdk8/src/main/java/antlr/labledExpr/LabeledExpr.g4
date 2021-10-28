@@ -6,6 +6,7 @@ prog:stat+;
 // # 之后是自定义 visitor 方法
 stat: expr NEWLINE         # printExpr
   | ID '=' expr NEWLINE    # assign
+  | 'clear'                # clear
   | NEWLINE                # blank
   ;
 

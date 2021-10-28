@@ -38,12 +38,61 @@ public interface PolicyVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhen(PolicyParser.WhenContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code whenExpr}
+	 * Visit a parse tree produced by the {@code exprOpBracket}
 	 * labeled alternative in {@link PolicyParser#whenExprDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWhenExpr(PolicyParser.WhenExprContext ctx);
+	T visitExprOpBracket(PolicyParser.ExprOpBracketContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code andOr}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAndOr(PolicyParser.AndOrContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprEquals}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprEquals(PolicyParser.ExprEqualsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code primaryOp}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrimaryOp(PolicyParser.PrimaryOpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprContain}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprContain(PolicyParser.ExprContainContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprIn}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprIn(PolicyParser.ExprInContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code self}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSelf(PolicyParser.SelfContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprLogic}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprLogic(PolicyParser.ExprLogicContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code then}
 	 * labeled alternative in {@link PolicyParser#thenDeclaration}.
@@ -58,48 +107,6 @@ public interface PolicyVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitThenExpr(PolicyParser.ThenExprContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code primaryProc}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrimaryProc(PolicyParser.PrimaryProcContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code or}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOr(PolicyParser.OrContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code and}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAnd(PolicyParser.AndContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code logicOp}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLogicOp(PolicyParser.LogicOpContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code expr}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpr(PolicyParser.ExprContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code equalsOrNot}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEqualsOrNot(PolicyParser.EqualsOrNotContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PolicyParser#exeUnit}.
 	 * @param ctx the parse tree

@@ -1,7 +1,8 @@
 create 策略名称1a
 with 场景,业务主键a1,业务主键b2
 when
-(bar > foo or bar = foo)
+(bar1 >= 变量 && bar = foo and ((a not contains b)))
 then
 return {"key":"value"}
 message {"k":"v"}
+callBack {"ky":"vl"}

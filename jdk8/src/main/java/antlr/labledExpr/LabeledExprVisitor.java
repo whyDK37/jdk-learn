@@ -1,4 +1,4 @@
-// Generated from /Users/why/ws_my/jdk-learn/jdk11/src/main/java/antlr/labledExpr/LabeledExpr.g4 by ANTLR 4.9.1
+// Generated from /Users/why/ws_my/jdk-learn/jdk8/src/main/java/antlr/labledExpr/LabeledExpr.g4 by ANTLR 4.9.1
 package antlr.labledExpr;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -30,6 +30,13 @@ public interface LabeledExprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAssign(LabeledExprParser.AssignContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code clear}
+	 * labeled alternative in {@link LabeledExprParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClear(LabeledExprParser.ClearContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code blank}
 	 * labeled alternative in {@link LabeledExprParser#stat}.

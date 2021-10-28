@@ -1,0 +1,1 @@
+(bar1 >= 变量 && bar = foo and ((a not contains b)))

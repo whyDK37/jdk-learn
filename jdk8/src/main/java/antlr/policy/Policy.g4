@@ -5,6 +5,11 @@ grammar Policy;
   protected boolean assertIsKeyword = true;
 }
 /** The start rule; beginparsing here. */
+
+/********************************************************************************************
+                          Parser section
+*********************************************************************************************/
+
 compilationUnit
     :   createDeclaration NEWLINE?
          withDeclaration NEWLINE?
@@ -25,37 +30,174 @@ whenDeclaration
 
 
 whenExprDeclaration
-    :   '(' expression ')'                           # whenExpr
+    :  '(' expression ')'                                      # exprOpBracket
+//    |    expression                                            # whenExpr
+//    ;
+//
+//expression
+    //: primary                                                        # primaryProc
+//    | expression op=('<=' | '>=' | '>' | '<'|'=' | '!=') expression # logicOp
+    //|   expression op=('+'|'-'|'*'|'/'|'%') expression     # mathOp
+//    |   ID                                                # identifier
+//    |   expression op=(AND | OR) expression                           # andOr
+//    | NEWLINE                                               # blanke
     ;
+//
+expression
+   : primary  # primaryOp
+   | '(' expression ')' # self
+   | expression op=('<=' | '>=' | '>' | '<' ) expression # exprLogic
+   | expression op=('=' | '!='  ) expression # exprEquals
+   | expression op=('and' | 'or') expression                           # andOr
+   | expression op=('&&'|'||') expression                           # andOr
+   | expression op=(CONTAIN | NOT_CONTAIN ) expression # exprContain
+   | expression op=( IN | NOT_IN ) expression # exprIn
+ ;
+
+//expression
+//    :   conditionalExpression
+//        (assignmentOperator expression
+//        )?
+//    ;
+//
+//assignmentOperator
+//    :   '='
+//    |   '+='
+//    |   '-='
+//    |   '*='
+//    |   '/='
+//    |   '&='
+//    |   '|='
+//    |   '^='
+//    |   '%='
+//    |    '<' '<' '='
+//    |    '>' '>' '>' '='
+//    |    '>' '>' '='
+//    ;
+//
+//conditionalExpression
+//    :   conditionalOrExpression
+//        ('?' expression ':' conditionalExpression
+//        )?
+//    ;
+//
+//conditionalOrExpression
+//    :   conditionalAndExpression
+//        ('||' conditionalAndExpression
+//        )*
+//    ;
+//conditionalAndExpression
+//    :   inclusiveOrExpression
+//        ('&&' inclusiveOrExpression
+//        )*
+//    ;
+//
+//inclusiveOrExpression
+//    :   exclusiveOrExpression
+//        ('|' exclusiveOrExpression
+//        )*
+//    ;
+//
+//exclusiveOrExpression
+//    :   andExpression
+//        ('^' andExpression
+//        )*
+//    ;
+//
+//andExpression
+//    :   equalityExpression
+//    ;
+//
+//equalityExpression
+//    :   instanceOfExpression
+//        (
+//            (   '=='
+//            |   '!='
+//            )
+//            instanceOfExpression
+//        )*
+//    ;
+//
+//
+//instanceOfExpression
+//    :   relationalExpression
+//
+//    ;
+//
+//relationalExpression
+//    :   shiftExpression
+//        (relationalOp shiftExpression
+//        )*
+//    ;
+//
+//relationalOp
+//    :    '<' '='
+//    |    '>' '='
+//    |   '<'
+//    |   '>'
+//    ;
+//
+//shiftExpression
+//    :   primary
+//    ;
+//
+//shiftOp
+//    :    '<' '<'
+//    |    '>' '>' '>'
+//    |    '>' '>'
+//    ;
+//
+//additiveExpression
+//    :   multiplicativeExpression
+//        (
+//            (   '+'
+//            |   '-'
+//            )
+//            multiplicativeExpression
+//         )*
+//    ;
+//
+//multiplicativeExpression
+//    :
+//        unaryExpression
+//        (
+//            (   '*'
+//            |   '/'
+//            |   '%'
+//            )
+//            unaryExpression
+//        )*
+//    ;
+//
+//
+///**
+// * NOTE: for '+' and '-', if the next token is int or long interal, then it's not a unary expression.
+// *       it's a literal with signed value. INTLTERAL AND LONG LITERAL are added here for this.
+// */
+//unaryExpression
+//    :   '+'  primary
+//    |   '-' primary
+//    ;
+
+/********************************************************************************************
+                  Lexer section
+*********************************************************************************************/
 
 thenDeclaration
     :   'then' NEWLINE  thenExprDeclaration*  # then
     ;
 //
 thenExprDeclaration
-    : ('return'|'message')+ anytext NEWLINE? # thenExpr
+    : ('return'|'message'|'callBack')+ anytext NEWLINE? # thenExpr
   ;
 
-expression
-    : primary                                                        # primaryProc
-    | expression op=('<=' | '>=' | '>' | '<'|'=' | '!=') expression # logicOp
-    |   expression ('==' | '!=') expression                          # equalsOrNot
-    //|   expression op=('+'|'-'|'*'|'/'|'%') expression     # mathOp
-//    |   ID                                                # identifier
-    |   expression 'and' expression                                   # and
-    |   expression 'or' expression                                     # or
-    | '(' expression ')'                                      # expr
-//    | NEWLINE                                               # blanke
-    ;
-//
 
 exeUnit: 'EXECUTE' anytext
         EOF
    ;
 
 primary
-    :   '(' expression ')'
-    |   literal
+    :   literal
     |   Identifier
     ;
 
@@ -177,14 +319,28 @@ IntegerTypeSuffix : ('l'|'L') ;
 //ID : ('a' .. 'z' | 'A' .. 'Z' | '\u4E00'..'\u9FA5' | '\uF900'..'\uFA2D')+ ; // matchidentifiers
 //INT : [0-9]+ ; // match integers
 NEWLINE:'\r'? '\n' ;//return newlinesto parser(end-statement signal)
+
 MUL : '*' ;
 DIV : '/' ;
 ADD : '+' ;
 SUB : '-' ;
-AND : 'and' ;
+
+//AND : 'and';
+AND2 : '&&';
+OR : 'or'  ;
+OR2: '||';
+//'<=' | '>=' | '>' | '<'|'=' | '!='
 GT : '>' ;
 GTE : '>=' ;
 LT : '<' ;
+LTE : '<=' ;
+EQL : '=' ;//equals
+NEQL : '!=' ;//not equals
+IN :'in';
+NOT_IN :'not in';
+CONTAIN : 'contains';
+NOT_CONTAIN : 'not contains';
+
 PARAMETER : 'PARAMETER';
 
 WS : [ \t\r\n]+ -> skip ;

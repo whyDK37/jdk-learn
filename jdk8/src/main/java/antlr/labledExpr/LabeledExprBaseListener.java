@@ -1,4 +1,4 @@
-// Generated from /Users/why/ws_my/jdk-learn/jdk11/src/main/java/antlr/labledExpr/LabeledExpr.g4 by ANTLR 4.9.1
+// Generated from /Users/why/ws_my/jdk-learn/jdk8/src/main/java/antlr/labledExpr/LabeledExpr.g4 by ANTLR 4.9.1
 package antlr.labledExpr;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -47,6 +47,18 @@ public class LabeledExprBaseListener implements LabeledExprListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAssign(LabeledExprParser.AssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterClear(LabeledExprParser.ClearContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitClear(LabeledExprParser.ClearContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

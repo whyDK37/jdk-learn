@@ -1,10 +1,10 @@
 package antlr.policy;
 
+import antlr.policy.PolicyParser.AndOrContext;
 import antlr.policy.PolicyParser.CreateContext;
 import antlr.policy.PolicyParser.ThenContext;
 import antlr.policy.PolicyParser.ThenExprContext;
 import antlr.policy.PolicyParser.WhenContext;
-import antlr.policy.PolicyParser.WhenExprContext;
 import antlr.policy.PolicyParser.WithContext;
 import java.util.HashMap;
 import java.util.List;
@@ -50,11 +50,17 @@ public class EvalVisitor extends PolicyBaseVisitor<String> {
     return super.visitWhen(ctx);
   }
 
-  @Override
-  public String visitWhenExpr(WhenExprContext ctx) {
-    println(ctx.getText());
-    return super.visitWhenExpr(ctx);
-  }
+//  @Override
+//  public String visitAndOr(AndOrContext ctx) {
+//    System.out.println(ctx.op.getType() == PolicyParser.AND);
+//    return super.visitAndOr(ctx);
+//  }
+
+  //  @Override
+//  public String visitWhenExpr(WhenExprContext ctx) {
+//    println(ctx.getText());
+//    return super.visitWhenExpr(ctx);
+//  }
 
 
 //  @Override

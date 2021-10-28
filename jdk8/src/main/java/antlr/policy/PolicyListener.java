@@ -54,17 +54,101 @@ public interface PolicyListener extends ParseTreeListener {
 	 */
 	void exitWhen(PolicyParser.WhenContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code whenExpr}
+	 * Enter a parse tree produced by the {@code exprOpBracket}
 	 * labeled alternative in {@link PolicyParser#whenExprDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterWhenExpr(PolicyParser.WhenExprContext ctx);
+	void enterExprOpBracket(PolicyParser.ExprOpBracketContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code whenExpr}
+	 * Exit a parse tree produced by the {@code exprOpBracket}
 	 * labeled alternative in {@link PolicyParser#whenExprDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitWhenExpr(PolicyParser.WhenExprContext ctx);
+	void exitExprOpBracket(PolicyParser.ExprOpBracketContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code andOr}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAndOr(PolicyParser.AndOrContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code andOr}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAndOr(PolicyParser.AndOrContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code exprEquals}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprEquals(PolicyParser.ExprEqualsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprEquals}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprEquals(PolicyParser.ExprEqualsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code primaryOp}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryOp(PolicyParser.PrimaryOpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code primaryOp}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryOp(PolicyParser.PrimaryOpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code exprContain}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprContain(PolicyParser.ExprContainContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprContain}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprContain(PolicyParser.ExprContainContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code exprIn}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprIn(PolicyParser.ExprInContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprIn}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprIn(PolicyParser.ExprInContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code self}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelf(PolicyParser.SelfContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code self}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelf(PolicyParser.SelfContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code exprLogic}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprLogic(PolicyParser.ExprLogicContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprLogic}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprLogic(PolicyParser.ExprLogicContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code then}
 	 * labeled alternative in {@link PolicyParser#thenDeclaration}.
@@ -89,78 +173,6 @@ public interface PolicyListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitThenExpr(PolicyParser.ThenExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code primaryProc}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterPrimaryProc(PolicyParser.PrimaryProcContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code primaryProc}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitPrimaryProc(PolicyParser.PrimaryProcContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code or}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterOr(PolicyParser.OrContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code or}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitOr(PolicyParser.OrContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code and}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterAnd(PolicyParser.AndContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code and}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitAnd(PolicyParser.AndContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code logicOp}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterLogicOp(PolicyParser.LogicOpContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code logicOp}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitLogicOp(PolicyParser.LogicOpContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code expr}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpr(PolicyParser.ExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code expr}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpr(PolicyParser.ExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code equalsOrNot}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterEqualsOrNot(PolicyParser.EqualsOrNotContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code equalsOrNot}
-	 * labeled alternative in {@link PolicyParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitEqualsOrNot(PolicyParser.EqualsOrNotContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PolicyParser#exeUnit}.
 	 * @param ctx the parse tree
