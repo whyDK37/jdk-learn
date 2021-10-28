@@ -148,6 +148,18 @@ public class PolicyBaseListener implements PolicyListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExpr(PolicyParser.ExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpr(PolicyParser.ExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterEqualsOrNot(PolicyParser.EqualsOrNotContext ctx) { }
 	/**
 	 * {@inheritDoc}

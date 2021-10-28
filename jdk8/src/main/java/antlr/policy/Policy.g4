@@ -29,11 +29,11 @@ whenExprDeclaration
     ;
 
 thenDeclaration
-    :   'then' NEWLINE  thenExprDeclaration  # then
+    :   'then' NEWLINE  thenExprDeclaration*  # then
     ;
 //
 thenExprDeclaration
-    : ('return'|'message')+ anytext  # thenExpr
+    : ('return'|'message')+ anytext NEWLINE? # thenExpr
   ;
 
 expression
@@ -43,7 +43,8 @@ expression
     //|   expression op=('+'|'-'|'*'|'/'|'%') expression     # mathOp
 //    |   ID                                                # identifier
     |   expression 'and' expression                                   # and
-    |   expression 'or' expression                                      # or
+    |   expression 'or' expression                                     # or
+    | '(' expression ')'                                      # expr
 //    | NEWLINE                                               # blanke
     ;
 //

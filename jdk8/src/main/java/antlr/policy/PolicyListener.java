@@ -138,6 +138,18 @@ public interface PolicyListener extends ParseTreeListener {
 	 */
 	void exitLogicOp(PolicyParser.LogicOpContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code expr}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpr(PolicyParser.ExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expr}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpr(PolicyParser.ExprContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code equalsOrNot}
 	 * labeled alternative in {@link PolicyParser#expression}.
 	 * @param ctx the parse tree

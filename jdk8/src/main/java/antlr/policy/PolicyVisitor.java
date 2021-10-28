@@ -87,6 +87,13 @@ public interface PolicyVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLogicOp(PolicyParser.LogicOpContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code expr}
+	 * labeled alternative in {@link PolicyParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpr(PolicyParser.ExprContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code equalsOrNot}
 	 * labeled alternative in {@link PolicyParser#expression}.
 	 * @param ctx the parse tree

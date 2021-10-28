@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 public class PolicyTest {
 
   public static void main(String[] args) throws Exception {
+//    String[] arg = {"antlr.labledExpr.LabeledExpr", "prog","-gui","/Users/why/ws_my/jdk-learn/labledExprData.txt"};
     String[] arg = {"antlr.policy.Policy", "compilationUnit","-gui","/Users/why/ws_my/jdk-learn/PolicyData.txt"};
     TestRig.main(arg);
   }
