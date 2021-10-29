@@ -21,8 +21,7 @@ public class PolicyParser extends Parser {
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, StringLiteral=16, 
 		Identifier=17, DecimalLiteral=18, NEWLINE=19, MUL=20, DIV=21, ADD=22, 
 		SUB=23, AND2=24, OR=25, OR2=26, GT=27, GTE=28, LT=29, LTE=30, EQL=31, 
-		NEQL=32, IN=33, NOT_IN=34, CONTAIN=35, NOT_CONTAIN=36, PARAMETER=37, WS=38, 
-		ANY=39;
+		NEQL=32, IN=33, NOT_IN=34, CONTAIN=35, NOT_CONTAIN=36, WS=37, ANY=38;
 	public static final int
 		RULE_compilationUnit = 0, RULE_createDeclaration = 1, RULE_withDeclaration = 2, 
 		RULE_whenDeclaration = 3, RULE_whenExprDeclaration = 4, RULE_expression = 5, 
@@ -45,7 +44,7 @@ public class PolicyParser extends Parser {
 			"'return'", "'message'", "'callBack'", "'EXECUTE'", "'null'", "'true'", 
 			"'false'", null, null, null, null, "'*'", "'/'", "'+'", "'-'", "'&&'", 
 			"'or'", "'||'", "'>'", "'>='", "'<'", "'<='", "'='", "'!='", "'in'", 
-			"'not in'", "'contains'", "'not contains'", "'PARAMETER'"
+			"'not in'", "'contains'", "'not contains'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -55,7 +54,7 @@ public class PolicyParser extends Parser {
 			null, null, null, null, "StringLiteral", "Identifier", "DecimalLiteral", 
 			"NEWLINE", "MUL", "DIV", "ADD", "SUB", "AND2", "OR", "OR2", "GT", "GTE", 
 			"LT", "LTE", "EQL", "NEQL", "IN", "NOT_IN", "CONTAIN", "NOT_CONTAIN", 
-			"PARAMETER", "WS", "ANY"
+			"WS", "ANY"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -1366,7 +1365,7 @@ public class PolicyParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3)\u008a\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3(\u008a\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\3\2\3\2\5\2!\n\2\3\2\3\2\5\2%"+
 		"\n\2\3\2\3\2\5\2)\n\2\3\2\3\2\3\2\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4"+

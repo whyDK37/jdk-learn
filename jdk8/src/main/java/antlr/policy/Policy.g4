@@ -341,7 +341,21 @@ NOT_IN :'not in';
 CONTAIN : 'contains';
 NOT_CONTAIN : 'not contains';
 
-PARAMETER : 'PARAMETER';
+// 关键词
+//KW_CREATE : 'create';
+//KW_UPDATE : 'update';
+//KW_DELETE : 'delete';
+//KW_EXECUTE : 'execute';
+//KW_QUERY : 'query';
+//KW_with : 'with';
+
+//KW_WHEN : 'when';
+//KW_THEN : 'then';
+//KW_RETURN : 'return';
+//KW_MESSAGE : 'message';
+//KW_CALLBACK : 'callBack';
+
+//KW_PARAMETER : 'PARAMETER';
 
 WS : [ \t\r\n]+ -> skip ;
 anytext: .*?;
