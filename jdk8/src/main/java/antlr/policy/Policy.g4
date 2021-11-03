@@ -13,8 +13,8 @@ grammar Policy;
 compilationUnit
     :   createDeclaration NEWLINE?
          withDeclaration NEWLINE?
-         whenDeclaration NEWLINE?
-         thenDeclaration
+         (whenDeclaration NEWLINE?
+                   thenDeclaration)+
         EOF
     ;
 // # 之后是自定义 visitor 方法

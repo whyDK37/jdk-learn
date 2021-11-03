@@ -6,3 +6,9 @@ then
 return {"key":"value"}
 message {"k":"v"}
 callBack {"ky":"vl"}
+when
+(bar1 >= 变量 && bar = foo and ((a not contains b)))
+then
+return {"key":"value"}
+message {"k":"v"}
+callBack {"ky":"vl"}
