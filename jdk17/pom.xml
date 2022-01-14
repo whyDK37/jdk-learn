@@ -8,12 +8,12 @@
   <packaging>pom</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>jdk11</name>
-  <description>jdk11</description>
+  <description>jdk17</description>
 
   <properties>
     <build.file.encoding>UTF-8</build.file.encoding>
-    <maven.compiler.source>1.11</maven.compiler.source>
-    <maven.compiler.target>1.11</maven.compiler.target>
+    <maven.compiler.source>1.17</maven.compiler.source>
+    <maven.compiler.target>1.17</maven.compiler.target>
 
     <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 
@@ -220,6 +220,9 @@
             </path>
             <!-- other annotation processors -->
           </annotationProcessorPaths>
+          <source>17</source>
+          <target>17</target>
+          <compilerArgs>--enable-preview</compilerArgs>
         </configuration>
       </plugin>
     </plugins>
