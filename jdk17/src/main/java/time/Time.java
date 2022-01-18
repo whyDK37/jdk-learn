@@ -3,6 +3,7 @@ package time;
 import static java.time.temporal.TemporalAdjusters.lastInMonth;
 import static java.time.temporal.TemporalAdjusters.nextOrSame;
 
+import com.alibaba.fastjson.JSON;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -19,7 +20,9 @@ import java.time.chrono.Chronology;
 import java.time.chrono.JapaneseDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * https://lw900925.github.io/java/java8-newtime-api.html
@@ -38,7 +41,10 @@ public class Time {
 
     otherCalender();
 
+    json();
+
   }
+
 
   private static void otherCalender() {
     LocalDate date = LocalDate.now();
@@ -114,7 +120,8 @@ public class Time {
     System.out.println("strDate5 = " + strDate5);
 
     String strDate7 = "2017-01-05 12:30:05";
-    LocalDateTime dateTime1 = LocalDateTime.parse(strDate7, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    LocalDateTime dateTime1 = LocalDateTime.parse(strDate7,
+        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
   }
 
@@ -140,4 +147,17 @@ public class Time {
     System.out.println(of);
   }
 
+
+  private static void json() {
+    Map<String, Object> map = new HashMap<>();
+    map.put("localDate", LocalDate.now());
+    map.put("localTime", LocalTime.now());
+    map.put("localDateTime", LocalDateTime.now());
+    map.put("ZonedDateTime",
+        ZonedDateTime.of(LocalDate.now(), LocalTime.now(), ZoneId.systemDefault()));
+    map.put("period", Period.of(0, 0, 1));
+    map.put("duration", Duration.ofDays(2));
+
+    System.out.println(JSON.toJSONString(map, true));
+  }
 }
