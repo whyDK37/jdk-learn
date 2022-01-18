@@ -120,8 +120,12 @@ public class Time {
     System.out.println("strDate5 = " + strDate5);
 
     String strDate7 = "2017-01-05 12:30:05";
-    LocalDateTime dateTime1 = LocalDateTime.parse(strDate7,
+    LocalDateTime localDateTime = LocalDateTime.parse(strDate7,
         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    System.out.println("localDateTime = " + localDateTime);
+    String localDateTimeStr = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    System.out.println("localDateTimeStr = " + localDateTimeStr);
+
 
   }
 
