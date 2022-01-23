@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>jdk8-learn</name>
+  <name>jdk8</name>
   <description>jdk-learn</description>
 
   <properties>
