@@ -102,6 +102,20 @@ public class Time {
     System.out.println("LocalDate.parse(strDate6, DateTimeFormatter.ofPattern(\"yyyy-MM-dd\")) = "
         + LocalDate.parse(strDate6, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
+    getDateFromTimestamp()
+
+  }
+
+  public static LocalDateTime getDateTimeFromTimestamp(long timestamp) {
+    if (timestamp == 0)
+      return null;
+    return LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), TimeZone
+        .getDefault().toZoneId());
+  }
+
+  public static LocalDate getDateFromTimestamp(long timestamp) {
+    LocalDateTime date = getDateTimeFromTimestamp(timestamp);
+    return date == null ? null : date.toLocalDate();
   }
 
   private static void localDateTime() {
