@@ -4,17 +4,8 @@ import static java.time.temporal.TemporalAdjusters.lastInMonth;
 import static java.time.temporal.TemporalAdjusters.nextOrSame;
 
 import com.alibaba.fastjson.JSON;
-import java.time.DayOfWeek;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
-import java.time.OffsetDateTime;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+
+import java.time.*;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Chronology;
 import java.time.chrono.JapaneseDate;
@@ -23,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * https://lw900925.github.io/java/java8-newtime-api.html
@@ -102,7 +94,7 @@ public class Time {
     System.out.println("LocalDate.parse(strDate6, DateTimeFormatter.ofPattern(\"yyyy-MM-dd\")) = "
         + LocalDate.parse(strDate6, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
-    getDateFromTimestamp()
+    getDateFromTimestamp(System.currentTimeMillis());
 
   }
 
