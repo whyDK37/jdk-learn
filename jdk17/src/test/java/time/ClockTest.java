@@ -2,8 +2,10 @@ package time;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -12,6 +14,7 @@ import java.time.ZonedDateTime;
 
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class ClockTest {
 
     @Mock
@@ -30,7 +33,7 @@ public class ClockTest {
 
     @BeforeEach
     void setup() {
-        MockitoAnnotations.openMocks(this);
+//        MockitoAnnotations.openMocks(this);
         when(clock.getZone()).thenReturn(zonedDateTime.getZone());
         when(clock.instant()).thenReturn(zonedDateTime.toInstant());
     }
